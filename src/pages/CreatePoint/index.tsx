@@ -6,6 +6,8 @@ import { LeafletMouseEvent } from 'leaflet'
 import axios from 'axios'
 import api from '../../services/api'
 
+import Dropzone from '../../components/Dropzone'
+
 import logo from '../../assets/logo.svg'
 import './styles.css'
 
@@ -109,8 +111,8 @@ const CreatePoint = () => {
   function handleSelectItem(id: number) {
     const alreadySelected = selectedItems.findIndex(item => item === id)
     if (alreadySelected >= 0) {
-      const filteredItems = selectedItems.findIndex(item => item !== id)
-      setSelectedItems([filteredItems])
+      const filteredItems = selectedItems.filter(item => item !== id)
+      setSelectedItems(filteredItems)
     } else {
       setSelectedItems([ ...selectedItems, id])
     }
@@ -156,6 +158,9 @@ const CreatePoint = () => {
 
       <form onSubmit={handleSubmit}>
         <h1>Cadastro do <br/> ponto de coleta</h1>
+
+        <Dropzone />
+        
         <fieldset>
           <legend><h2>Dados</h2></legend>
           <div className="field">
